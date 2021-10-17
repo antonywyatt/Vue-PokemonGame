@@ -1,7 +1,7 @@
 <template>
     <h1 v-if="!pokemon">Espere por favor...</h1>
     <div v-else>
-        <h1>¿Quién es este Pokemón?</h1>
+        <h1>¿Quién es este Pokemón 🤔?</h1>
         <PokemonPicture
             :pokemonId="pokemon.id" 
             :showPokemon="showPokemon" 
@@ -11,9 +11,11 @@
             @selection-pokemon="checkAnswer($event)"
         />
         <template v-if="showAnswer">
-            <h2>{{ message }}</h2>
-            <button @click="newGame">
-                Nuevo juego
+            <h2  :class="{ ok : correct , no : !correct }">{{ message }}</h2>
+            <button 
+                class="btn-new"
+                @click="newGame">
+                Siguiente pokemon
             </button>
         </template>
     </div>
@@ -37,7 +39,8 @@ export default {
             pokemon: null,
             showPokemon: false,
             showAnswer: false,
-            message: ''
+            message: '',
+            correct: false
         }
     },
     methods: {
@@ -54,9 +57,11 @@ export default {
             this.showAnswer = true
 
             if( selectedId === this.pokemon.id){
-                this.message = `Correcto, es ${ this.pokemon.name }`
+                this.message = `Correcto, es ${ this.pokemon.name } ✅`
+                this.correct = true
             }else{
-                this.message = `Ops..., era ${ this.pokemon.name }`
+                this.message = `Ops..., era ${ this.pokemon.name } ❌`
+                this.correct = false
             }
         },
         newGame(){
@@ -72,3 +77,26 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.btn-new{
+    border: none;
+    background: #4eff89;
+    height: 50px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.btn-new:hover{
+    border: black solid 1px;
+    background: #4eff89;
+}
+
+.ok{
+    color: #41de3b
+}
+
+.no{
+    color: rgb(184, 28, 28);
+}
+
+</style>

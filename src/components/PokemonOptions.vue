@@ -27,16 +27,17 @@ ul {
     list-style-type: none;
 }
 li {
+    padding-top: 5px;
     background-color: white;
     border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
     cursor: pointer;
     margin-bottom: 10px;
     width: 250px;
+    height: 30px;
 }
 
 li:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(48, 158, 21, 0.411);
 }
 
 .options-container {
